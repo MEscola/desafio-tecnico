@@ -21,7 +21,7 @@ class UserForm(forms.ModelForm):
         }
 
 
-    def clean_cpf(self):
+    def cpf(self):
         cpf = self.cleaned_data.get('cpf')
         if not validate_cpf(cpf):
             raise forms.ValidationError("CPF inválido")

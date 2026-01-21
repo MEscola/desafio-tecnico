@@ -8,7 +8,7 @@ def cadastrar_usuario(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Usuário cadastrado com sucesso!')
+            
             return redirect('lista_usuarios')
     else:
         form = UserForm()
