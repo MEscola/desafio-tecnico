@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Excluir Usuário</h2>
+    <p>Tem certeza de que deseja excluir o usuário "{{ usuario.nome_completo }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" style="background-color: #dc3545; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+            Sim, Deletar
+        </button>
+        <a href="{% url 'perfil_usuario' usuario.id %}" style="margin-left: 10px; text-decoration: none; color: #666;">
+            Cancelar
+        </a>
+{% endblock %}

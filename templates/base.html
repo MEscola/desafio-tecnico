@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Projeto</title>
+</head>
+<body>
+   <header>
+        <nav>
+            <a href="{% url 'home' %}">Home</a> | 
+            <a href="{% url 'lista_usuarios' %}">Usuários</a> |
+            <a href="{% url 'cadastrar_projeto' %}">Projetos</a> |
+            <a href="{% url 'lista_projetos' %}">Lista de Projetos</a>
+        </nav>
+    </header>
+    <hr>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Desafio Técnico</p>
+    </footer>
+</body>
+</html>

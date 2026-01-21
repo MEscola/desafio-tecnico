@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Projetos Cadastrados</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nome do Projeto</th>
+            <th>Dono do Projeto</th>
+            <th>Detalhes</th>
+            <th>Remover</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for projeto in projetos %}
+        <tr>
+            <td>{{ projeto.nome }}</td>
+            <td>{{ projeto.dono_projeto }}</td>
+            <td>
+                <a href="{% url 'detalhe_projeto' projeto.id %}">
+                    Ver detalhes
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'deletar_projeto' projeto.id %}">
+                    Remover
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Nenhum projeto cadastrado ainda.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<a href="{% url 'cadastrar_projeto' %}">Cadastrar outro projeto</a>
+{% endblock %}

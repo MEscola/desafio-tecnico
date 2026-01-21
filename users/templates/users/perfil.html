@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Perfil do Usuário</h2>
+    <p><strong>Nome:</strong> {{ usuario.nome_completo }}</p>
+    <p><strong>Email:</strong> {{ usuario.email }}</p>
+    <p><strong>Data de Registro:</strong> {{ usuario.data_registro }}</p>
+
+    <h3>Projetos</h3>
+    {% if projetos_dono %}
+        <ul>
+            {% for projeto in projetos_dono %}
+                <li>{{ projeto.nome }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum projeto cadastrado.</p>
+        <button>
+            <a href="{% url 'cadastrar_projeto' %}" style="text-decoration: none; color: black;">
+                Cadastrar Projeto
+            </a></button>
+    {% endif %}
+
+    <h3>Subitens que ele é responsável:</h3>
+    {% if subitens_responsavel %}
+        <ul>
+            {% for subitem in subitens_responsavel %}
+                <li>{{ subitem.descricao }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum subitem cadastrado.</p>
+    {% endif %}
+
+{% endblock %}

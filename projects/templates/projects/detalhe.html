@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Detalhes do Projeto</h1>
+<hr>
+
+<h2>{{ project.nome }}</h2>
+<p><strong>Descrição:</strong> {{ project.descricao }}</p>
+<p><strong>Data de início:</strong> {{ project.data_inicio }}</p>
+<p><strong>Data de fim:</strong> {{ project.data_fim }}</p>
+<p><strong>Dono do projeto:</strong> {{ project.dono_projeto }}</p>
+<button>
+    <a href="{% url 'editar' project.id %}" style="text-decoration: none; color: black;">
+        Editar Projeto
+    </a>
+</button>
+<hr>
+<h3>Subitens do Projeto</h3>
+
+{% if subitens %} 
+    <ul>
+    {% for subitem in subitens %} 
+        <li> 
+            <strong>{{ subitem.titulo }}</strong><br>
+            {{ subitem.descricao }}<br> 
+            <strong>Status:</strong> {{ subitem.get_status_display }}<br> 
+            <strong>Responsável:</strong> {{ subitem.responsavel }}<br> 
+            <strong>Prazo:</strong> {{ subitem.prazo|default:"Não definido" }} <br>
+            
+            <div style="margin-top: 10px;">
+                <a href="{% url 'deletar_subitem' subitem.id %}" style="color: red; text-decoration: none; font-weight: bold;">
+                    🗑️ Remover este subitem
+                </a>
+            </div>
+        </li> 
+        <hr>
+    {% endfor %} 
+    </ul>
+{% else %} 
+    <p>Este projeto ainda não possui subitens cadastrados.</p>
+{% endif %}
+
+<a href="{% url 'criar_subitem' project.id %}">
+    ➕ Adicionar Subitem
+</a>
+
+<br><br>
+<a href="{% url 'lista_projetos' %}">
+    ⬅ Voltar para lista de projetos
+</a>
+{% endblock %}

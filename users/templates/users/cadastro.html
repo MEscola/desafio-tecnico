@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.phone-mask').mask('(00) 00000-0000');
+        $('.cpf-mask').mask('000.000.000-00');
+    });
+</script>
+<h1>Cadastrar Projetos</h1>
+
+<form method="post">
+  {% csrf_token %}
+
+  {{ form.non_field_errors }}
+
+  {% for field in form %}
+    <div>
+      <label>{{ field.label }}</label><br>
+      {{ field }}
+      {{ field.errors }}
+    </div>
+  {% endfor %}
+
+  <button type="submit">Cadastrar</button>
+</form>
+{% endblock %}

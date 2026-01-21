@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Editar Projeto: {{ project.nome }}</h1> 
+<form method="post">
+    {% csrf_token %}
+
+    {% for field in form %}
+        
+            <p><strong>{{ field.label_tag }}</strong></p>
+            {{ field }}
+        {% if field.errors %}
+
+            <div style="color: red;">
+                {{ field.errors }}
+            </div>
+        {% endif %}
+    {% endfor %}<hr>
+
+    <button type="submit">Salvar Alterações</button>
+</form>
+<p><strong><a href="{% url 'detalhe_projeto' project.id %}">Voltar para o Projeto</a>
+{% endblock %}
