@@ -26,3 +26,8 @@ def validade_telefone(value):
     
     if not re.match(pattern, value):
         raise ValidationError("Número de telefone inválido.")
+
+def validade_nascimento(value):
+    from datetime import date
+    if value > date.today():
+        raise ValidationError("A data de nascimento não pode ser no futuro.")

@@ -40,6 +40,29 @@ if (cpfInput) {
     });
 }
 
-});
+const emailInput = document.querySelector("#id_email");
 
+if (emailInput) {
+
+    emailInput.addEventListener("blur", function () { 
+        
+        const emailValue = emailInput.value;
+        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (emailValue && !pattern.test(emailValue)) {
+            emailInput.setCustomValidity("Por favor, insira um endereço de email válido.");
+            emailInput.style.borderColor = "red";
+        } else {
+            emailInput.style.borderColor = "";
+            emailInput.setCustomValidity("");  
+        }
+    });
+
+    // 2. Limpa o erro qdo o usuário volta a digitar 
+        emailInput.addEventListener("input", function () {
+        emailInput.setCustomValidity(""); 
+        emailInput.style.borderColor = "";
+    });
+}
+}); 
 

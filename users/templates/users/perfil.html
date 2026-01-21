@@ -4,7 +4,6 @@
     <h2>Perfil do Usuário</h2>
     <p><strong>Nome:</strong> {{ usuario.nome_completo }}</p>
     <p><strong>Email:</strong> {{ usuario.email }}</p>
-    <p><strong>Data de Registro:</strong> {{ usuario.data_registro }}</p>
 
     <h3>Projetos</h3>
     {% if projetos_dono %}
@@ -26,6 +25,8 @@
         <ul>
             {% for subitem in subitens_responsavel %}
                 <li>{{ subitem.descricao }}</li>
+                <li>Projeto: {{ subitem.projeto.nome }}</li>
+                <li>Status: {{ subitem.get_status_display }}</li>
             {% endfor %}
         </ul>
     {% else %}

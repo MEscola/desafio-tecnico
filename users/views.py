@@ -1,3 +1,4 @@
+from pyexpat.errors import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserForm
 from .models import User
@@ -7,15 +8,12 @@ def cadastrar_usuario(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Usuário cadastrado com sucesso!')
             return redirect('lista_usuarios')
     else:
         form = UserForm()
 
-    return render(
-        request,
-        'users/cadastro.html',
-        {'form': form}
-    )
+    return render(request,'users/cadastro.html',{'form': form})
 
 def listar_usuarios(request):
     usuarios_lista = User.objects.all()
@@ -47,5 +45,7 @@ def excluir_usuario(request, usuario_id):
         return redirect('lista_usuarios')
 
     return render(request, 'users/excluir.html', {'usuario': usuario})
+
+
 
 

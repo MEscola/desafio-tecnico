@@ -4,7 +4,7 @@ from .validators import validade_telefone, validate_cpf
 from datetime import datetime
 
 class UserForm(forms.ModelForm):
-    # Forçamos o aceite a ser obrigatório no nível do formulário
+    # Força o aceite a ser obrigatório no nível do formulário
     aceite = forms.BooleanField(
         required=True, 
         error_messages={'required': 'Você deve aceitar os termos e condições.'}
@@ -16,28 +16,22 @@ class UserForm(forms.ModelForm):
         widgets = {
             'telefone': forms.TextInput(attrs={'class': 'phone-mask'}),
             'cpf': forms.TextInput(attrs={'class': 'cpf-mask'}),
+            'data_nascimento': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
-    
-    def clean_data_nascimento(self):
-        data = self.cleaned_data.get('data_nascimento')
-        if data and data > datetime.now().date():
-            raise forms.ValidationError("A data de nascimento não pode ser no futuro.")
-        return data
-        
-    def cpf(self):
+
+    def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf')
         if not validate_cpf(cpf):
             raise forms.ValidationError("CPF inválido")
         return cpf
-
-    def clean_telefone(self):
-        telefone = self.cleaned_data.get('telefone')
-        if not telefone:
-            raise forms.ValidationError("Telefone inválido")
-        
-        validade_telefone(telefone) 
-        return telefone
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email').lower()
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Este email já está em uso.")
+        return email
 
     def clean_aceite(self):
         aceite = self.cleaned_data.get('aceite')
