@@ -36,7 +36,9 @@ python manage.py migrate
 Obs: Caso o terminal solicite um valor padrão para campos DateField, insira uma data no formato 'YYYY-MM-DD' (ex: `'2000-01-01'').
 
 ## 3. Iniciar o servidor:
+```bash
 python manage.py runserver
+```
 
 ### 4. Ferramentas de Produtividade
 * **VS Code IntelliSense:** Utilizado ativamente para garantir a precisão na escrita do código, autocompletar sintaxes do Django e agilizar a importação de módulos e validações personalizadas, reduzindo erros de digitação e aumentando a velocidade de entrega.
