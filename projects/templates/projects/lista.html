@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+
 <h1>Projetos Cadastrados</h1>
 
-<table border="1">
+<table>
     <thead>
         <tr>
             <th>Nome do Projeto</th>
@@ -18,14 +20,10 @@
             <td>{{ projeto.nome }}</td>
             <td>{{ projeto.dono_projeto }}</td>
             <td>
-                <a href="{% url 'detalhe_projeto' projeto.id %}">
-                    Ver detalhes
-                </a>
+                <a href="{% url 'detalhe_projeto' projeto.id %}" class="btn-ver">Ver detalhes</a>
             </td>
             <td>
-                <a href="{% url 'deletar_projeto' projeto.id %}">
-                    Remover
-                </a>
+                <a href="{% url 'deletar_projeto' projeto.id %}" class="btn-remover">Remover</a>
             </td>
         </tr>
         {% empty %}
@@ -37,5 +35,7 @@
 </table>
 
 <br>
-<a href="{% url 'cadastrar_projeto' %}">Cadastrar outro projeto</a>
+<button>
+    <a href="{% url 'cadastrar_projeto' %}">Cadastrar outro projeto</a>
+</button>
 {% endblock %}

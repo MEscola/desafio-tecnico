@@ -1,8 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Projeto</title>
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
    <header>
@@ -13,7 +17,7 @@
             <a href="{% url 'lista_projetos' %}">Lista de Projetos</a>
         </nav>
     </header>
-    <hr>
+    
 
     <main>
         {% block content %}
@@ -21,7 +25,10 @@
     </main>
 
     <footer>
+        <hr>
         <p>&copy; 2026 - Desafio Técnico</p>
     </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

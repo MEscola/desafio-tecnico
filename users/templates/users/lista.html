@@ -2,17 +2,36 @@
 
 {% block content %}
     <h2>Lista de Usuários</h2>
-    <a href="{% url 'cadastrar_usuario' %}">Cadastrar Novo Usuário</a>
     
-    <ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome Completo</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+     <tbody>
     {% for usuario in usuarios %}
-        <li>
-            {{ usuario.nome_completo }} - {{ usuario.email }} 
-            <a href="{% url 'perfil_usuario' usuario.id %}">Ver Perfil</a>
-            <a href="{% url 'excluir_usuario' usuario.id %}">Remover</a>
-        </li>
+        <tr>
+            <td>{{ usuario.nome_completo }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>
+                <a href="{% url 'perfil_usuario' usuario.id %}" class="btn-ver">Ver Perfil | </a>
+                <a href="{% url 'excluir_usuario' usuario.id %}" class="btn-remover">Remover</a>
+            </td>
+        </tr>
+        
     {% empty %}
-        <li>Nenhum usuário cadastrado.</li>
+    <tr>
+        <td colspan="3">Nenhum usuário cadastrado.</td>
     {% endfor %}
-    </ul>
+
+    </tbody>
+</table>
+<br>
+<button>
+    <a href="{% url 'cadastrar_usuario' %}">Cadastrar Novo Usuário</a>
+</button>
+
 {% endblock %}

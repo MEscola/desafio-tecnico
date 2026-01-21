@@ -8,12 +8,26 @@
 <p><strong>Descrição:</strong> {{ project.descricao }}</p>
 <p><strong>Data de início:</strong> {{ project.data_inicio }}</p>
 <p><strong>Data de fim:</strong> {{ project.data_fim }}</p>
-<p><strong>Dono do projeto:</strong> {{ project.dono_projeto }}</p>
+<p><strong>Dono do projeto:</strong> {{ project.dono_projeto.nome_completo }}</p>
 <button>
-    <a href="{% url 'editar' project.id %}" style="text-decoration: none; color: black;">
+    <a href="{% url 'editar' project.id %}">
         Editar Projeto
-    </a>
-</button>
+    </a></button>
+
+    <hr>
+    <h3>Participantes do Projeto</h3>
+    {% if subitens %}
+        <ul>
+        {% for subitem in subitens %}
+            <li>{{ subitem.responsavel }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum participante cadastrado.</p>
+    {% endif %}
+
+    
+
 <hr>
 <h3>Subitens do Projeto</h3>
 
@@ -28,9 +42,11 @@
             <strong>Prazo:</strong> {{ subitem.prazo|default:"Não definido" }} <br>
             
             <div style="margin-top: 10px;">
-                <a href="{% url 'deletar_subitem' subitem.id %}" style="color: red; text-decoration: none; font-weight: bold;">
-                    🗑️ Remover este subitem
-                </a>
+                <button>
+                    <a href="{% url 'deletar_subitem' subitem.id %}" style="color: red; text-decoration: none; font-weight: bold;">
+                    Remover subitem
+                </a></button>
+                
             </div>
         </li> 
         <hr>
@@ -40,12 +56,15 @@
     <p>Este projeto ainda não possui subitens cadastrados.</p>
 {% endif %}
 
-<a href="{% url 'criar_subitem' project.id %}">
-    ➕ Adicionar Subitem
+<button>
+<a href="{% url 'criar_subitem' project.id %}" style="padding: 20px; color: blue; text-decoration: none; font-weight: bold;">
+    Adicionar Subitem
+</a></button>
+<button>
+<a href="{% url 'lista_projetos' %}" style="padding: 20px; color: black; text-decoration: none; font-weight: bold;">
+Voltar para lista de projetos
 </a>
+</button>
 
-<br><br>
-<a href="{% url 'lista_projetos' %}">
-    ⬅ Voltar para lista de projetos
-</a>
+
 {% endblock %}
